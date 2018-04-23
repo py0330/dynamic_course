@@ -93,8 +93,8 @@ pm = [eye(3), j6_xyz';0,0,0,1];
 I6o = Tf(pm) * [eye(3)*0.1879, zeros(3,3);zeros(3,3), eye(3)] * Tf(pm)';
 
 % end effector£¨Ä©¶Ë£©
-ee_rpy = [0.0 0.0 1.570796325];
-ee_xyz = [0.0 0.0823 0.0];
+ee_rpy = [pi, pi/2, 0];
+ee_xyz = [0.425 + 0.39225, 0.13585 - 0.1197 + 0.093 + 0.0823, 0.089159 - 0.09465];
 
 pm_eeo = [eul2rotm(ee_rpy,'ZYX'), ee_xyz'
     0,0,0,1];
@@ -142,13 +142,13 @@ m6_cm = Tf(P5) * m6_cmo;
 
 % Constraint force matrix is as follow:
 %    Fix R1 R2 R3 R4 R5 R6 M1 M2 M3 M4 M5 M6
-% GR  1   1                 1
-% L1     -1  1             -1  1  
-% L2        -1  1             -1  1
-% L3           -1  1             -1  1
-% L4              -1  1             -1  1
-% L5                 -1  1             -1  1
-% L6                    -1                -1
+% GR  1  -1                -1
+% L1      1 -1              1 -1  
+% L2         1 -1              1 -1
+% L3            1 -1              1 -1
+% L4               1 -1              1 -1
+% L5                  1 -1              1 -1
+% L6                     1                 1
 C=[
 eye(6,6),       -j1_cm, zeros(6,5), zeros(6,5), zeros(6,5), zeros(6,5), zeros(6,5),     -m1_cm, zeros(6,1), zeros(6,1), zeros(6,1), zeros(6,1), zeros(6,1)
 zeros(6,6),      j1_cm,     -j2_cm, zeros(6,5), zeros(6,5), zeros(6,5), zeros(6,5),      m1_cm,     -m2_cm, zeros(6,1), zeros(6,1), zeros(6,1), zeros(6,1)
